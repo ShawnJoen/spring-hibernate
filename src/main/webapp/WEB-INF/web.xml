@@ -7,11 +7,11 @@
         <param-name>contextConfigLocation</param-name>
         <param-value>classpath:config/spring-context.xml</param-value>
     </context-param>
+    <!-- Spring监听器 -->
     <listener>
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
     </listener>
-    
-    <!-- Spring MVC -->
+    <!-- SpringWebMVC -->
     <servlet>
         <servlet-name>appServlet</servlet-name>
         <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
@@ -19,6 +19,7 @@
             <param-name>contextConfigLocation</param-name>
             <param-value>classpath:config/spring-servlet.xml</param-value>
         </init-param>
+        <!--配置容器在启动的时候就加载这个servlet并实例化-->
         <load-on-startup>1</load-on-startup>
     </servlet>
 	<servlet-mapping>
@@ -26,16 +27,15 @@
 	  <url-pattern>/</url-pattern>
 	  <url-pattern>*.do</url-pattern>
 	</servlet-mapping>
-
+    <!-- 默认首页 -->
     <welcome-file-list>
         <welcome-file>index.jsp</welcome-file>
     </welcome-file-list>
-    
     <!-- 会话超时时间 -->
 	<session-config>
 		<session-timeout>30</session-timeout>
 	</session-config>
-	
+	<!-- 字符集过滤  -->
 	<filter>  
 	  <filter-name>CharacterEncodingFilter</filter-name>  
 	  <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>  

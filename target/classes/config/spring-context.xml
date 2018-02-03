@@ -9,4 +9,42 @@
 	
 	<context:component-scan base-package="com.hibernate" />
 
+    <!--配置数据源-->
+    <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
+    	<!--数据库连接驱动-->
+        <property name="driverClass" value="${jdbc.driver}"/>
+        <property name="jdbcUrl" value="${jdbc.url}?useUnicode=true&amp;serverTimezone=PRC&amp;characterEncoding=UTF-8"/>
+        <property name="user" value="${jdbc.username}"/>
+        <property name="password" value="${jdbc.password}"/>
+        <!--最大连接数-->
+        <property name="maxPoolSize" value="40"/>
+        <!--最小连接数-->
+        <property name="minPoolSize" value="1"/>
+        <!--初始化连接池内的数据库连接-->
+        <property name="initialPoolSize" value="10"/>
+        <!--最大空闲时间-->
+        <property name="maxIdleTime" value="20"/>
+    </bean>
+    <!--配置session工厂-->
+    <bean id="sessionFactory" class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
+        <property name="dataSource" ref="dataSource" />
+        <property name="packagesToScan" value="com.ssh.entity" />
+        <property name="hibernateProperties">
+            <props>
+            	<!--hibernate根据实体自动生成数据库表-->
+                <prop key="hibernate.hbm2ddl.auto">${hibernate.hbm2ddl.auto}</prop>
+                <!--指定数据库方言-->
+                <prop key="hibernate.dialect">${hibernate.dialect}</prop>
+                <!--在控制台显示执行的数据库操作语句-->
+                <prop key="hibernate.show_sql">${hibernate.show_sql}</prop>
+                <!--在控制台显示执行的数据哭操作语句（格式）-->
+                <prop key="hibernate.format_sql">${hibernate.format_sql}</prop>
+            </props>
+        </property>
+    </bean>
+    <!-- 事物管理器配置  -->
+    <bean id="transactionManager" class="org.springframework.orm.hibernate5.HibernateTransactionManager">
+        <property name="sessionFactory" ref="sessionFactory" />
+    </bean>
+    
 </beans>
