@@ -3,18 +3,25 @@ package com.hibernate.controller;
 import java.util.Date;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import com.hibernate.service.UserService;
 
 @Controller
 public class TestController {
 	private static final Logger logger = LoggerFactory.getLogger(TestController.class);
 	
+	@Autowired
+    private UserService userService;
+	
+	@ResponseBody
 	@RequestMapping(value = "/createUser", method = RequestMethod.GET)
-	public void createUser() {
-		logger.info("createUser: {}", new Date());
+	public void createUser(@RequestParam("mobile") String mobile, @RequestParam("password") String password) {
+		logger.info("createUser.userId: {}", userService.createUser(mobile, password));
 	}
 	
 	@RequestMapping(value = "/selectUser", method = RequestMethod.GET)
