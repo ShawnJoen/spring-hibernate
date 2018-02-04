@@ -3,7 +3,6 @@ package com.hibernate.entity;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Column;
-import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -17,6 +16,7 @@ public class Users implements Serializable {
 	private static final long serialVersionUID = -1954271141882683062L;
 
 	@Id //注解一个主键, @GeneratedValue默认为GenerationType.AUTO
+	@Column(name = "userId", nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY) //注释定义了标识字段生成方式
 	private Long userId;
 	
@@ -31,10 +31,7 @@ public class Users implements Serializable {
 	
 	@Column(name="createTime", nullable=false)
 	private Date createTime;
-	
-	//@Embedded //注解将 UserExtends类嵌套进来
-    //private UserExtends userExtends;
-	
+
 	public Long getUserId() {
 		return userId;
 	}
@@ -65,12 +62,6 @@ public class Users implements Serializable {
 	public void setCreateTime(Date createTime) {
 		this.createTime = createTime;
 	}
-//	public UserExtends getUserExtends() {
-//		return userExtends;
-//	}
-//	public void setUserExtends(UserExtends userExtends) {
-//		this.userExtends = userExtends;
-//	}
 	@Override
 	public String toString() {
 		return "Users [userId=" + userId + ", mobile=" + mobile + ", password=" + password + ", userName=" + userName

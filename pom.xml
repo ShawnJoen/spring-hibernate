@@ -125,6 +125,12 @@
 	    <artifactId>hibernate-c3p0</artifactId>
 	    <version>5.2.12.Final</version>
 	</dependency>
+	<!-- 用于Controller把JavaBean返回转Json -->
+	<dependency>
+	    <groupId>com.fasterxml.jackson.core</groupId>
+	    <artifactId>jackson-databind</artifactId>
+	    <version>2.9.4</version>
+	</dependency>
 	
   </dependencies>
   <build>

@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import com.hibernate.entity.vo.UsersVo;
 import com.hibernate.service.UserService;
 
 @Controller
@@ -24,9 +25,11 @@ public class TestController {
 		logger.info("createUser.userId: {}", userService.createUser(mobile, password));
 	}
 	
+	@ResponseBody
 	@RequestMapping(value = "/selectUser", method = RequestMethod.GET)
-	public void selectUser(@RequestParam("mobile") String mobile) {
+	public UsersVo selectUser(@RequestParam("mobile") String mobile) {
 		logger.info("selectUser: {}", new Date());
+		return userService.selectUser(mobile);
 	}
 	
 	@RequestMapping(value = "/selectUserList", method = RequestMethod.GET)

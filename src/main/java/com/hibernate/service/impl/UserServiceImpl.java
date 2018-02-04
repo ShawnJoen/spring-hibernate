@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import com.hibernate.entity.Users;
+import com.hibernate.entity.vo.UsersVo;
 import com.hibernate.repository.UserRepository;
 import com.hibernate.service.UserService;
 
@@ -28,9 +29,8 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public Users selectUser() {
-		// TODO Auto-generated method stub
-		return null;
+	public UsersVo selectUser(String mobile) {
+		return userRepository.getUserByMobile(mobile);
 	}
 
 	@Override
