@@ -1,6 +1,8 @@
 package com.hibernate.controller;
 
 import java.util.Date;
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,15 +34,19 @@ public class TestController {
 		return userService.selectUser(mobile);
 	}
 	
+	@ResponseBody
 	@RequestMapping(value = "/selectUserList", method = RequestMethod.GET)
-	public void selectUserList() {
+	public List<UsersVo> selectUserList() {
 		logger.info("selectUserList: {}", new Date());
+		return userService.selectUserList();
 	}
 	
+	@ResponseBody
 	@RequestMapping(value = "/updateUser", method = RequestMethod.GET)
-	public void updateUser(@RequestParam("mobile") String mobile, 
+	public int updateUser(@RequestParam("mobile") String mobile, 
 			@RequestParam("userName") String userName) {
 		logger.info("updateUser: {}", new Date());
+		return userService.updateUser(mobile, userName);
 	}
 	
 	@RequestMapping(value = "/deleteUser", method = RequestMethod.GET)

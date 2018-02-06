@@ -33,16 +33,16 @@ public class UserServiceImpl implements UserService {
 		return userRepository.getUserByMobile(mobile);
 	}
 
+	@Transactional
 	@Override
-	public List<Users> selectUserList() {
-		// TODO Auto-generated method stub
-		return null;
+	public List<UsersVo> selectUserList() {
+		return userRepository.getUserList();
 	}
-
+	
+	@Transactional
 	@Override
-	public void updateUser() {
-		// TODO Auto-generated method stub
-
+	public int updateUser(String mobile, String userName) {
+		return userRepository.updateUser(mobile, userName);
 	}
 
 }

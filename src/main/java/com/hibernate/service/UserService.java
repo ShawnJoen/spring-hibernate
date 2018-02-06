@@ -7,6 +7,6 @@ import com.hibernate.entity.vo.UsersVo;
 public interface UserService {
 	Long createUser(String mobile, String password);
 	UsersVo selectUser(String mobile);
-	List<Users> selectUserList();
-	void updateUser();
+	List<UsersVo> selectUserList();
+	int updateUser(String mobile, String userName);
 }
