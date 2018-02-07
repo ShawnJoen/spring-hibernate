@@ -28,6 +28,7 @@ public class UserServiceImpl implements UserService {
 		return userRepository.save(user);
 	}
 
+	@Transactional
 	@Override
 	public UsersVo selectUser(String mobile) {
 		return userRepository.getUserByMobile(mobile);
